@@ -1,5 +1,30 @@
 import { getProducts, getEmployees, getOrders } from "./database.js"
 
+document.addEventListener(
+    "click",
+    (clickEvent) => {
+        const itemClicked = clickEvent.target
+        if (itemClicked.id.startsWith("employee")) {
+            const [,employeeId] = itemClicked.id.split("--")
+            const employeeOrders = 0
+
+            for (const employee of employees) {
+                if (employee.id === parseInt(employeeId)) {
+                    const employeeOrders = orders.filter(
+                        (order) => {
+                            if (employee.id === order.employeeId) {
+                                return true;
+                            }
+                        }
+                    )
+
+                    window.alert(`${employee.name} has sold ${employeeOrders.length} products.`)
+                }
+            }
+        }
+    }
+)
+
 // Get copy of state for use in this module
 const products = getProducts()
 const employees = getEmployees()
